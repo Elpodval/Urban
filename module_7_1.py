@@ -32,8 +32,7 @@ class Shop:
                     file.write(product_str + '\n')
                 else:
                     print(f"Продукт {product_str} уже есть в магазине")
-
-
+        file.close()
 
 # Пример использования
 s1 = Shop()
