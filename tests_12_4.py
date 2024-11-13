@@ -1,6 +1,15 @@
 import unittest
 import logging
 
+# Настройка логирования
+logging.basicConfig(
+    level=logging.INFO,
+    filename='runner_tests.log',
+    filemode='w',  # Параметр filemode должен быть 'w', чтобы файл перезаписывался
+    format='%(asctime)s - %(levelname)s - %(message)s',
+    encoding='utf-8'
+)
+
 class Runner:
     def __init__(self, name, speed=5):
         if isinstance(name, str):
@@ -64,21 +73,49 @@ class RunnerTest(unittest.TestCase):
     @skip_if_frozen
     def test_run(self):
         try:
-            runner = Runner(123, speed=-10)  # Передаём число вместо строки
+            runner = Runner(123, speed=10)  # Передаём число вместо строки
+            logging.info('"test_run" выполнен успешно')
         except TypeError:
             logging.warning("Неверный тип данных для объекта Runner")
-        else:
-            logging.info('"test_run" выполнен успешно')
 
     @skip_if_frozen
     def test_walk(self):
         try:
-            runner = Runner("Usain", speed=-5)
+            runner = Runner("Usain", speed=-5)  # Передаём отрицательное значение скорости
+            logging.info('"test_walk" выполнен успешно')
         except ValueError:
             logging.warning("Неверная скорость для Runner")
-        else:
-            logging.info('"test_walk" выполнен успешно')
+
+
+class TournamentTest(unittest.TestCase):
+    is_frozen = True
+
+    @skip_if_frozen
+    def test_first_tournament(self):
+        usain = Runner("Usain", speed=10)
+        nik = Runner("Nik", speed=3)
+        tournament = Tournament(90, usain, nik)
+        results = tournament.start()
+        self.assertEqual(results[1].name, "Usain")
+
+    @skip_if_frozen
+    def test_second_tournament(self):
+        andrei = Runner("Andrei", speed=9)
+        nik = Runner("Nik", speed=3)
+        tournament = Tournament(90, andrei, nik)
+        results = tournament.start()
+        self.assertEqual(results[1].name, "Andrei")
+
+    @skip_if_frozen
+    def test_third_tournament(self):
+        usain = Runner("Usain", speed=10)
+        andrei = Runner("Andrei", speed=9)
+        nik = Runner("Nik", speed=3)
+        tournament = Tournament(90, usain, andrei, nik)
+        results = tournament.start()
+        self.assertEqual(results[1].name, "Andrei")
 
 
 if __name__ == "__main__":
+    # Запускаем тесты
     unittest.main()
