@@ -5,7 +5,7 @@ from aiogram.dispatcher import FSMContext
 import asyncio
 import logging
 
-api = "7450150397:AAH_pF5Zt4l36wyWY5WNbqkl9J1Zap2ZKKo"
+api = ":"
 bot = Bot(token=api)
 dp = Dispatcher(bot, storage=MemoryStorage())
 
