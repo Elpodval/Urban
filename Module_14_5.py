@@ -9,7 +9,7 @@ from aiogram.types import ReplyKeyboardMarkup, KeyboardButton, InlineKeyboardMar
 
 from homework.Module_13.module_13_6 import UserState
 
-API = '7450150397:AAH2Uhs_GHvWJ1D_4JU2NjXjDl1ziiUFnwE'
+API = ''
 
 bot = Bot(token=API)
 storage = MemoryStorage()
