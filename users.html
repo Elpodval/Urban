@@ -1,0 +1,42 @@
+{% extends 'main.html'%}
+{% block crud_container %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users List</title>
+</head>
+<body>
+    <h1>Users List</h1>
+    <ul>
+        {% for user in users_list %}
+            <li><a href="/user/{{ user.id }}">{{ user.username }} ({{ user.age }})</a></li>
+        {% endfor %}
+    </ul>
+
+    {% if user %}
+        <h2>User Details</h2>
+        <p>ID: {{ user.id }}</p>
+        <p>Username: {{ user.username }}</p>
+        <p>Age: {{ user.age }}</p>
+    {% endif %}
+</body>
+</html>
+
+    {% if user %}
+        <article class="card container fluid"></article>
+        <br>
+        <!-- Напишите свой код здесь (Вывод свойств объекта User) -->
+    {% else %}
+            <section class="container-fluid">
+                <h2 align="center"> Users </h2>
+                <br>
+                <div class="card">
+                    <ul class="list-group list-group-flush">
+                        <!-- Напишите свой код здесь (перебор пользователей) -->
+                    </ul>
+                </div>
+            </section>
+    {% endif %}
+{% endblock %}
